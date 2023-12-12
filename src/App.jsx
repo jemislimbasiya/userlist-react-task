@@ -3,7 +3,9 @@ import axios from 'axios';
 
 export default function App() {
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [bloodGroups, setBloodGroups] = useState([]);
+  
 
   useEffect(() => {
     // Get users from the dummy API
@@ -23,9 +25,18 @@ export default function App() {
       });
   }, []);
 
+  let handleChange = (event)=>{
+    console.log(event.target.value);
+    setSearchTerm(event.target.value);
+  }
+
   return (
     <div>
       <h1>User Search App</h1>
+      <div>
+        <label htmlFor="search">Search: </label>
+        <input type='text' id='search' value={searchTerm} onChange={handleChange} />
+      </div>
     </div>
   );
 };
