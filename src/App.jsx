@@ -7,6 +7,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+//grid-v2
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 
 export default function App() {
@@ -53,54 +66,62 @@ export default function App() {
   
 
   return (
-    <div>
-      <h2>User Search App</h2>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid>
+        <Grid xs={8}>
+          <Item>
+          <div>
+              <h2>User Search App</h2>
       
-      <div>
-      <TextField
-          id="filled-search search"
-          label="Search field"
-          type="search"
-          variant="filled"
-          value={searchTerm}
-          onChange={handleChange}
-        />
-      </div>
+            <div>
+            <TextField
+                id="filled-search search"
+                label="Search field"
+                type="search"
+                variant="filled"
+                value={searchTerm}
+                onChange={handleChange}
+              />
+            </div>
 
-      <div>
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
-        <InputLabel id="demo-simple-select-filled-label">Select Blood Group</InputLabel>
-        <Select
-          labelId="demo-simple-select-filled-label bloodGroup"
-          id="demo-simple-select-filled bloodGroup"
-          onChange={(e) => setSelectedBloodGroup(e.target.value)}
-        >
-          <MenuItem value="">
-            <em>Select Blood Group</em>
-          </MenuItem>
-          {bloodGroups.map((group, index) => (
-            <MenuItem key={index} value={group}>{group}</MenuItem>
-          ))}
-        </Select>
-        </FormControl>
-      </div>
+            <div>
+              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
+              <InputLabel id="demo-simple-select-filled-label">Select Blood Group</InputLabel>
+              <Select
+                labelId="demo-simple-select-filled-label bloodGroup"
+                id="demo-simple-select-filled bloodGroup"
+                onChange={(e) => setSelectedBloodGroup(e.target.value)}
+              >
+                <MenuItem value="">
+                  <em>Select Blood Group</em>
+                </MenuItem>
+                {bloodGroups.map((group, index) => (
+                  <MenuItem key={index} value={group}>{group}</MenuItem>
+                ))}
+              </Select>
+              </FormControl>
+            </div>
 
-      <div>
-        <h2>Filtered Users</h2>
-        <ul>
-          {filteredUsers.map(user => (
-            <li key={user.id}>
-              <strong>Username :</strong>{user.username},&nbsp;&nbsp;&nbsp;&nbsp;
-              <strong>Email:</strong>{user.email},&nbsp;&nbsp;&nbsp;&nbsp;
-              <strong>Mo.Number: </strong>{user.phone},&nbsp;&nbsp;&nbsp;&nbsp;
-              <strong>Address: </strong>{user.address.address},&nbsp;&nbsp;&nbsp;&nbsp;
-              <strong>City: </strong>{user.address.city}&nbsp;&nbsp;&nbsp;&nbsp;
-            </li>
-          ))}
-        </ul>
-      </div>
+            <div>
+              <h2>Filtered Users</h2>
+              <ul>
+                {filteredUsers.map(user => (
+                  <li key={user.id}>
+                    <strong>Username :</strong>{user.username},&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Email:</strong>{user.email},&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Mo.Number: </strong>{user.phone},&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>Address: </strong>{user.address.address},&nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong>City: </strong>{user.address.city}&nbsp;&nbsp;&nbsp;&nbsp;
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-    </div>
+          </div>
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
