@@ -8,8 +8,6 @@ export default function App() {
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
 
-  
-  
   useEffect(() => {
     // Get users from the dummy API
     axios.get('https://dummyjson.com/users')
