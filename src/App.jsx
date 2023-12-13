@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+//for Serch 
+import TextField from '@mui/material/TextField';
+//for dropdown
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -46,23 +54,35 @@ export default function App() {
 
   return (
     <div>
-      <h1>User Search App</h1>
+      <h2>User Search App</h2>
+      
       <div>
-        <label htmlFor="search">Search: </label>
-        <input type='text' id='search' value={searchTerm} onChange={handleChange} />
+      <TextField
+          id="filled-search search"
+          label="Search field"
+          type="search"
+          variant="filled"
+          value={searchTerm}
+          onChange={handleChange}
+        />
       </div>
 
       <div>
-        <label htmlFor="bloodGroup">Blood Group: </label>
-        <select
-          id="bloodGroup"
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
+        <InputLabel id="demo-simple-select-filled-label">Select Blood Group</InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label bloodGroup"
+          id="demo-simple-select-filled bloodGroup"
           onChange={(e) => setSelectedBloodGroup(e.target.value)}
         >
-          <option value="">Select Blood Group</option>
+          <MenuItem value="">
+            <em>Select Blood Group</em>
+          </MenuItem>
           {bloodGroups.map((group, index) => (
-            <option key={index} value={group}>{group}</option>
+            <MenuItem key={index} value={group}>{group}</MenuItem>
           ))}
-        </select>
+        </Select>
+        </FormControl>
       </div>
 
       <div>
