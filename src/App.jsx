@@ -7,19 +7,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-//grid-v2
-import { styled } from '@mui/material/styles';
+//for card
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { blue } from '@mui/material/colors';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Unstable_Grid2';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 
 export default function App() {
@@ -66,62 +60,62 @@ export default function App() {
   
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid>
-        <Grid xs={8}>
-          <Item>
-          <div>
-              <h2>User Search App</h2>
+    <div >
+      <Card sx={{ maxWidth: 500, boxShadow:3, ml:55, mt:3, border:1, borderRadius:'16px', borderColor:'primary.main'}} >  
+      <h2 sx={{mt:3, mb:3}} style={{color:"blue"}} variant="outlined">USER SEARCH APP</h2><hr />
+        
+      <div>
+      <TextField 
+          id="filled-search search"
+          label="Search field"
+          type="search"
+          variant="filled"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
+        <InputLabel id="demo-simple-select-filled-label">Select Blood Group</InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label bloodGroup"
+          id="demo-simple-select-filled bloodGroup"
+          onChange={(e) => setSelectedBloodGroup(e.target.value)}
+        >
+          <MenuItem value="">
+            <em>Select Blood Group</em>
+          </MenuItem>
+          {bloodGroups.map((group, index) => (
+            <MenuItem key={index} value={group}>{group}</MenuItem>
+          ))}
+        </Select>
+        </FormControl>
+      </div>
       
-            <div>
-            <TextField
-                id="filled-search search"
-                label="Search field"
-                type="search"
-                variant="filled"
-                value={searchTerm}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
-              <InputLabel id="demo-simple-select-filled-label">Select Blood Group</InputLabel>
-              <Select
-                labelId="demo-simple-select-filled-label bloodGroup"
-                id="demo-simple-select-filled bloodGroup"
-                onChange={(e) => setSelectedBloodGroup(e.target.value)}
-              >
-                <MenuItem value="">
-                  <em>Select Blood Group</em>
-                </MenuItem>
-                {bloodGroups.map((group, index) => (
-                  <MenuItem key={index} value={group}>{group}</MenuItem>
-                ))}
-              </Select>
-              </FormControl>
-            </div>
-
-            <div>
-              <h2>Filtered Users</h2>
-              <ul>
-                {filteredUsers.map(user => (
-                  <li key={user.id}>
-                    <strong>Username :</strong>{user.username},&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>Email:</strong>{user.email},&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>Mo.Number: </strong>{user.phone},&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>Address: </strong>{user.address.address},&nbsp;&nbsp;&nbsp;&nbsp;
-                    <strong>City: </strong>{user.address.city}&nbsp;&nbsp;&nbsp;&nbsp;
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-          </div>
-          </Item>
-        </Grid>
-      </Grid>
-    </Box>
+      
+      
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            <i style={{color:'blue'}}>Filtered Users</i><hr />
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            <ul>
+            {filteredUsers.map(user => (
+              <li key={user.id} >
+                <Box sx={{ color: 'text.primary' }}><strong>Username :   </strong>{user.username},<br /></Box>
+                <Box sx={{ color: 'text.primary' }}><strong>Email:   </strong>{user.email},<br /></Box>
+                <Box sx={{ color: 'text.primary' }}><strong>Mo.Number:   </strong>{user.phone},<br /></Box>
+                <Box sx={{ color: 'text.primary' }}><strong>Address:   </strong>{user.address.address},<br /></Box>
+                <Box sx={{ color: 'text.primary' }}><strong>City:   </strong>{user.address.city} <hr /></Box>
+              </li>
+              
+            ))}
+            </ul>
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
